@@ -36,6 +36,16 @@ public class DownloadThread implements Runnable {
     public void run() {
 
         Log.d(TAG, "run: " + "Start Thread " + threadNum);
+        /*for (int i=0; i<10; i++) {
+            for (int j=0; j<10; j++) {
+                try {
+                    sendMessage(i, (long) (j*10));
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }*/
         if (downloadFile()) {
             Log.d(TAG, "run: " + "Download successful " + threadNum);
         } else {
@@ -79,7 +89,7 @@ public class DownloadThread implements Runnable {
             byte[] buffer = new byte[1024];
 
             int downloadedSize = 0;
-            final Long totalSize = response.body().contentLength();
+            long totalSize = response.body().contentLength();
 
             int bufferLength = 0;
             while ((bufferLength = input.read(buffer)) > 0) {
